@@ -37,16 +37,19 @@ return array(
 			'allowAutoLogin'=>true,
 		),
 		// uncomment the following to enable URLs in path-format
-		/*
+
+        //TODO: find how to remove index.php from url
 		'urlManager'=>array(
 			'urlFormat'=>'path',
+            'showScriptName'=>false,
+            'caseSensitive'=>false,
 			'rules'=>array(
 				'<controller:\w+>/<id:\d+>'=>'<controller>/view',
 				'<controller:\w+>/<action:\w+>/<id:\d+>'=>'<controller>/<action>',
 				'<controller:\w+>/<action:\w+>'=>'<controller>/<action>',
 			),
 		),
-		*/
+
 
 		// uncomment the following to use a MySQL database
 
