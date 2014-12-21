@@ -53,19 +53,26 @@ class DynamicTabularForm extends CActiveForm {
      * @param CModel[] $models 
      * @param array $htmlOptions
      */
-    public function rowForm($models = array(), $rowView=null, $htmlOptions = array()) {
+    public function rowForm($models = array(), $rowView=null, $htmlOptions = array(), $options = null) {
         if($rowView==null)
             $rowView = $this->defaultRowView;
         
         $htmlOptions = array_merge(array('id' => 'row-' . $this->rowViewCounter), $htmlOptions);
         $id = $htmlOptions['id'];
 
-        echo CHtml::openTag('div', $htmlOptions);
+        if (null !== $options) {
+            $tag = $options['tag'];
+        }
+
+        if ($tag === null) {
+            $tag = 'div';
+        }
+        echo CHtml::openTag($tag, $htmlOptions);
 
         foreach ($models as $key => $model) {
             $this->controller->renderPartial($rowView, array('key' => $key, 'model' => $model, 'form' => $this));
         }
-        echo "</div>";
+        echo CHtml::closeTag($tag);
 
         $buttonId = 'addButton-' . $this->rowViewCounter;
         echo CHtml::button('+', array(
